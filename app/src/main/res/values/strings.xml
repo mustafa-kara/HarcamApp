@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">Harcam</string>
+    
+    <!-- Screen Titles -->
+    <string name="expense_notes_title">Harcama Notları</string>
+    <string name="add_expense_title">Yeni Harcama</string>
+    
+    <!-- Labels -->
+    <string name="description_label">Açıklama</string>
+    <string name="amount_label">Tutar (₺)</string>
+    <string name="total_expense_label">Toplam Harcama</string>
+    
+    <!-- Placeholders -->
+    <string name="description_placeholder">Ör: Market alışverişi</string>
+    <string name="amount_placeholder">0.00</string>
+    
+    <!-- Buttons -->
+    <string name="add_button">Ekle</string>
+    <string name="cancel_button">İptal</string>
+    <string name="delete_button">Sil</string>
+    
+    <!-- Content Descriptions -->
+    <string name="add_expense_cd">Harcama Ekle</string>
+    <string name="delete_expense_cd">Sil</string>
+    
+    <!-- Messages -->
+    <string name="empty_expenses_title">Henüz harcama kaydınız yok</string>
+    <string name="empty_expenses_description">İlk harcamanızı eklemek için + butonuna tıklayın</string>
+    
+    <!-- Error Messages -->
+    <string name="description_empty_error">Açıklama boş bırakılamaz</string>
+    <string name="amount_empty_error">Tutar boş bırakılamaz</string>
+    <string name="amount_invalid_error">Geçerli bir sayı giriniz</string>
+    <string name="amount_negative_error">Tutar 0\'dan büyük olmalıdır</string>
+</resources>
