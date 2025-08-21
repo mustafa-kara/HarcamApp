@@ -10,22 +10,22 @@ Modern, minimalist ve renkli bir harcama takip uygulaması. **MVVM Architecture*
 <table>
   <tr>
     <td align="center">
-      <img src="https://mustafakara.site/jirafeau/f.php?h=1HLJWor5&p=1" width="200"/>
+      <img src="https://mustafakara.dev/jirafeau/f.php?h=3I4DdSAo&p=1" width="200"/>
       <br>
       <sub><b>Ana Sayfa</b></sub>
     </td>
     <td align="center">
-      <img src="https://mustafakara.site/jirafeau/f.php?h=0Oi1IA5Y&p=1" width="200"/>
+      <img src="https://mustafakara.dev/jirafeau/f.php?h=1Nsgfho3&p=1" width="200"/>
       <br>
       <sub><b>Raporlar</b></sub>
     </td>
     <td align="center">
-      <img src="https://mustafakara.site/jirafeau/f.php?h=0sBojB7X&p=1" width="200"/>
+      <img src="https://mustafakara.dev/jirafeau/f.php?h=1VU0akET&p=1" width="200"/>
       <br>
       <sub><b>Harcama Ekle</b></sub>
     </td>
     <td align="center">
-      <img src="https://mustafakara.site/jirafeau/f.php?h=1IKJK0Ot&p=1" width="200"/>
+      <img src="https://mustafakara.dev/jirafeau/f.php?h=0vPyyjOn&p=1" width="200"/>
       <br>
       <sub><b>Harcama Düzenle</b></sub>
     </td>
