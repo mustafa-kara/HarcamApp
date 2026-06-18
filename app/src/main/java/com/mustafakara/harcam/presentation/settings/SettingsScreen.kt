@@ -22,7 +22,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -37,6 +36,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.mustafakara.harcam.core.ui.components.ScreenHeader
 import com.mustafakara.harcam.core.ui.theme.HarcamTheme
 import com.mustafakara.harcam.core.ui.theme.ListRowMinHeight
 import com.mustafakara.harcam.core.ui.theme.MinTouchTarget
@@ -65,16 +65,14 @@ fun SettingsScreen(
     var showDisableConfirm by remember { mutableStateOf(false) }
     var showCurrencySheet by remember { mutableStateOf(false) }
 
-    Scaffold(
-        modifier = modifier,
-        topBar = { TopAppBar(title = { Text("Settings", style = HarcamTheme.type.headline) }) },
-    ) { padding ->
+    Scaffold(modifier = modifier) { padding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(padding)
                 .verticalScroll(rememberScrollState()),
         ) {
+            ScreenHeader(title = "Settings")
             SectionHeader("APPEARANCE")
             ThemeSelector(selected = state.themeMode, onSelect = viewModel::setThemeMode)
 

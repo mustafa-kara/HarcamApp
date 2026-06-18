@@ -50,7 +50,7 @@ enum class TopLevelDestination(
     val selectedIcon: ImageVector,
     val unselectedIcon: ImageVector,
 ) {
-    DASHBOARD(Routes.DASHBOARD, "Dashboard", Icons.Filled.AccountBalanceWallet, Icons.Outlined.AccountBalanceWallet),
+    DASHBOARD(Routes.DASHBOARD, "Home", Icons.Filled.AccountBalanceWallet, Icons.Outlined.AccountBalanceWallet),
     EXPENSES(Routes.EXPENSES, "Expenses", Icons.Filled.ReceiptLong, Icons.Outlined.ReceiptLong),
     REPORTS(Routes.REPORTS, "Reports", Icons.Filled.BarChart, Icons.Outlined.BarChart),
     BUDGET(Routes.BUDGET, "Budget", Icons.Filled.Savings, Icons.Outlined.Savings),

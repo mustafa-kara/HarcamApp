@@ -1,6 +1,7 @@
 package com.mustafakara.harcam.presentation.auth
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -150,11 +151,21 @@ private fun CurrencyPicker(selected: Currency, onSelect: (Currency) -> Unit) {
             } else {
                 androidx.compose.material3.MaterialTheme.colorScheme.surface
             }
+            val borderColor = if (isSelected) {
+                androidx.compose.material3.MaterialTheme.colorScheme.primary
+            } else {
+                androidx.compose.material3.MaterialTheme.colorScheme.outline
+            }
             Box(
                 modifier = Modifier
                     .weight(1f)
                     .heightIn(min = MinTouchTarget)
                     .background(bg, RoundedCornerShape(Radius.md))
+                    .border(
+                        width = if (isSelected) 1.5.dp else 1.dp,
+                        color = borderColor,
+                        shape = RoundedCornerShape(Radius.md),
+                    )
                     .selectable(selected = isSelected, role = Role.RadioButton, onClick = { onSelect(currency) })
                     .padding(vertical = Spacing.md)
                     .semantics { contentDescription = if (isSelected) "${currency.code}, selected" else currency.code },

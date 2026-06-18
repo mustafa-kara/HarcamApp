@@ -12,14 +12,18 @@ Harcam is a local-first finance companion: log expenses, organize them by catego
 
 <table>
   <tr>
-    <td align="center"><img src="https://mustafakara.dev/jirafeau/f.php?h=3I4DdSAo&p=1" width="200"/><br/><sub><b>Dashboard</b></sub></td>
-    <td align="center"><img src="https://mustafakara.dev/jirafeau/f.php?h=1Nsgfho3&p=1" width="200"/><br/><sub><b>Reports</b></sub></td>
-    <td align="center"><img src="https://mustafakara.dev/jirafeau/f.php?h=1VU0akET&p=1" width="200"/><br/><sub><b>Add Expense</b></sub></td>
-    <td align="center"><img src="https://mustafakara.dev/jirafeau/f.php?h=0vPyyjOn&p=1" width="200"/><br/><sub><b>Edit Expense</b></sub></td>
+    <td align="center"><img src="screenshots/shot_02_dashboard.png" width="200"/><br/><sub><b>Dashboard</b></sub></td>
+    <td align="center"><img src="screenshots/shot_04_reports.png" width="200"/><br/><sub><b>Reports</b></sub></td>
+    <td align="center"><img src="screenshots/shot_05_budget.png" width="200"/><br/><sub><b>Budget</b></sub></td>
+    <td align="center"><img src="screenshots/shot_03_expenses.png" width="200"/><br/><sub><b>Expenses</b></sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="screenshots/shot_07_add.png" width="200"/><br/><sub><b>Add Expense</b></sub></td>
+    <td align="center"><img src="screenshots/shot_06_settings.png" width="200"/><br/><sub><b>Settings</b></sub></td>
+    <td align="center"><img src="screenshots/shot_01_onboarding.png" width="200"/><br/><sub><b>Onboarding</b></sub></td>
+    <td></td>
   </tr>
 </table>
-
-> Screenshots show v1; the screens above have since been rebuilt on the documented Clean Architecture with the full feature set below.
 
 ---
 

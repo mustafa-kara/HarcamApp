@@ -26,7 +26,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -45,6 +44,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.mustafakara.harcam.core.ui.components.BudgetProgressBar
 import com.mustafakara.harcam.core.ui.components.EmptyState
 import com.mustafakara.harcam.core.ui.components.ExpenseRow
+import com.mustafakara.harcam.core.ui.components.ScreenHeader
 import com.mustafakara.harcam.core.ui.components.SkeletonBlock
 import com.mustafakara.harcam.core.ui.theme.HarcamTheme
 import com.mustafakara.harcam.core.ui.theme.Radius
@@ -70,31 +70,35 @@ fun DashboardScreen(
 
     Scaffold(
         modifier = modifier,
-        topBar = { TopAppBar(title = { Text("Dashboard", style = HarcamTheme.type.headline) }) },
         floatingActionButton = {
-            FloatingActionButton(onClick = onAddExpense) {
+            FloatingActionButton(
+                onClick = onAddExpense,
+                containerColor = MaterialTheme.colorScheme.primary,
+                contentColor = MaterialTheme.colorScheme.onPrimary,
+            ) {
                 Icon(Icons.Filled.Add, contentDescription = "Add expense")
             }
         },
     ) { padding ->
-        when {
-            state.isLoading -> DashboardSkeleton(Modifier.padding(padding))
-            state.isEmpty -> EmptyState(
-                icon = Icons.Outlined.ReceiptLong,
-                title = "No spending logged yet",
-                description = "Add your first expense to see your month at a glance.",
-                actionText = "Add expense",
-                onAction = onAddExpense,
-                modifier = Modifier.padding(padding),
-            )
-            else -> DashboardContent(
-                state = state,
-                formatter = formatter,
-                onOpenBudget = onOpenBudget,
-                onOpenCategories = onOpenCategories,
-                onOpenExchange = onOpenExchange,
-                modifier = Modifier.padding(padding),
-            )
+        Column(modifier = Modifier.padding(padding)) {
+            ScreenHeader(title = "Dashboard")
+            when {
+                state.isLoading -> DashboardSkeleton()
+                state.isEmpty -> EmptyState(
+                    icon = Icons.Outlined.ReceiptLong,
+                    title = "No spending logged yet",
+                    description = "Add your first expense to see your month at a glance.",
+                    actionText = "Add expense",
+                    onAction = onAddExpense,
+                )
+                else -> DashboardContent(
+                    state = state,
+                    formatter = formatter,
+                    onOpenBudget = onOpenBudget,
+                    onOpenCategories = onOpenCategories,
+                    onOpenExchange = onOpenExchange,
+                )
+            }
         }
     }
 }
@@ -112,7 +116,7 @@ private fun DashboardContent(
     LazyColumn(
         modifier = modifier.fillMaxSize(),
         contentPadding = PaddingValues(
-            start = Spacing.lg, end = Spacing.lg, top = Spacing.md, bottom = Spacing.xxxl,
+            start = Spacing.lg, end = Spacing.lg, top = Spacing.sm, bottom = Spacing.xxxl,
         ),
         verticalArrangement = Arrangement.spacedBy(Spacing.md),
     ) {
@@ -196,7 +200,7 @@ private fun BalanceHeroCard(
                     Text(
                         text = formatter.formatSigned(spent, currency, isExpense = true),
                         style = HarcamTheme.type.amountSm,
-                        color = colors.expense,
+                        color = colors.textSecondary,
                     )
                     if (income > 0.0) {
                         Text(

@@ -31,7 +31,6 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.SwipeToDismiss
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.rememberDismissState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -49,6 +48,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.mustafakara.harcam.core.ui.components.EmptyState
+import com.mustafakara.harcam.core.ui.components.ScreenHeader
 import com.mustafakara.harcam.core.ui.components.ExpenseRow
 import com.mustafakara.harcam.core.ui.components.SkeletonBlock
 import com.mustafakara.harcam.core.ui.theme.HarcamTheme
@@ -89,15 +89,19 @@ fun ExpenseListScreen(
 
     Scaffold(
         modifier = modifier,
-        topBar = { TopAppBar(title = { Text("Expenses", style = HarcamTheme.type.headline) }) },
         snackbarHost = { SnackbarHost(snackbarHostState) },
         floatingActionButton = {
-            FloatingActionButton(onClick = onAddExpense) {
+            FloatingActionButton(
+                onClick = onAddExpense,
+                containerColor = MaterialTheme.colorScheme.primary,
+                contentColor = MaterialTheme.colorScheme.onPrimary,
+            ) {
                 Icon(Icons.Filled.Add, contentDescription = "Add expense")
             }
         },
     ) { padding ->
         Column(modifier = Modifier.padding(padding)) {
+            ScreenHeader(title = "Expenses")
             CategoryFilterStrip(
                 categories = state.allCategories,
                 selectedCategoryId = state.selectedCategoryId,
@@ -244,7 +248,7 @@ private fun DayHeader(dateLabel: String, dayTotal: String, dayTotalSpoken: Strin
         Text(
             text = dayTotal,
             style = HarcamTheme.type.amount,
-            color = HarcamTheme.colors.expense,
+            color = HarcamTheme.colors.textSecondary,
             modifier = Modifier.semantics {
                 liveRegion = LiveRegionMode.Polite
                 contentDescription = dayTotalSpoken

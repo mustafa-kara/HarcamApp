@@ -92,10 +92,13 @@ fun ExpenseRow(
                 color = colors.textSecondary,
             )
         }
+        // Neutral amount: in an expense list every row is an expense, so coloring them all red
+        // carries no information — it's just noise. The signed "−" prefix marks direction; color is
+        // reserved for genuine risk signals (budget warning/over).
         Text(
             text = formatter.formatSigned(expense.amount, expense.currency, isExpense = true),
             style = HarcamTheme.type.amount,
-            color = colors.expense,
+            color = colors.textPrimary,
             modifier = Modifier.semantics {
                 contentDescription = formatter.semanticLabel(expense.amount, expense.currency, isExpense = true)
             },

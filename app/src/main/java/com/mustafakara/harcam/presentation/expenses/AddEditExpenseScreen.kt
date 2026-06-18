@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -51,6 +52,8 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -262,7 +265,10 @@ private fun CategoryPicker(
             val catColor = colors.category.byKey(category.colorKey)
             Column(
                 modifier = Modifier
-                    .heightIn(min = 72.dp)
+                    // Fixed width so every option is the same size regardless of label length —
+                    // otherwise "Bills" and "Entertainment" produce ragged, uneven cards.
+                    .width(84.dp)
+                    .heightIn(min = 80.dp)
                     .border(
                         width = if (selected) 2.dp else 1.dp,
                         color = if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outline,
@@ -273,12 +279,12 @@ private fun CategoryPicker(
                         role = Role.RadioButton,
                         onClick = { onSelect(category.id) },
                     )
-                    .padding(Spacing.sm)
+                    .padding(vertical = Spacing.md, horizontal = Spacing.xs)
                     .semantics {
                         contentDescription = if (selected) "${category.name}, selected" else category.name
                     },
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(Spacing.xs),
+                verticalArrangement = Arrangement.spacedBy(Spacing.sm),
             ) {
                 CategoryAvatar(
                     color = catColor,
@@ -290,6 +296,9 @@ private fun CategoryPicker(
                     text = category.name,
                     style = HarcamTheme.type.caption,
                     color = if (selected) MaterialTheme.colorScheme.primary else colors.textSecondary,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    textAlign = TextAlign.Center,
                 )
             }
         }

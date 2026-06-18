@@ -32,6 +32,33 @@ import com.mustafakara.harcam.core.ui.theme.IconSize
 import com.mustafakara.harcam.core.ui.theme.Radius
 import com.mustafakara.harcam.core.ui.theme.Spacing
 
+/**
+ * Compact inline screen title for top-level destinations.
+ *
+ * Replaces the Material [androidx.compose.material3.TopAppBar], whose fixed 64dp height plus its own
+ * insets left a large empty band above the title. This is just a title row laid out as the first
+ * item of the screen — same horizontal rhythm as the content, far less vertical cost. An optional
+ * [trailing] slot hosts a single action (e.g. an edit affordance).
+ */
+@Composable
+fun ScreenHeader(
+    title: String,
+    modifier: Modifier = Modifier,
+    trailing: (@Composable () -> Unit)? = null,
+) {
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(start = Spacing.lg, end = Spacing.lg, top = Spacing.lg, bottom = Spacing.sm),
+        contentAlignment = Alignment.CenterStart,
+    ) {
+        Text(text = title, style = HarcamTheme.type.headline, color = HarcamTheme.colors.textPrimary)
+        if (trailing != null) {
+            Box(modifier = Modifier.align(Alignment.CenterEnd)) { trailing() }
+        }
+    }
+}
+
 /** Primary CTA — design.md §8.16. One per screen. */
 @Composable
 fun PrimaryButton(
@@ -136,7 +163,15 @@ fun EmptyState(
     }
 }
 
-/** Circular category avatar — design.md §8.6 (color + icon, never color alone). */
+/**
+ * Circular category avatar — design.md §8.6.
+ *
+ * Intentionally monochrome: a list of rows with one saturated tint per category reads as visual
+ * noise ("AI slop"). Category color is meaningful only where it encodes data — the report charts
+ * and their legends — so here the avatar uses neutral surface + secondary-text tokens, and the
+ * category icon alone carries identity. The [color] parameter is kept for call-site compatibility
+ * (and so a future per-screen accent remains a one-line change) but is not rendered.
+ */
 @Composable
 fun CategoryAvatar(
     color: CategoryColor,
@@ -148,13 +183,13 @@ fun CategoryAvatar(
     Box(
         modifier = modifier
             .size(size)
-            .background(color.container, CircleShape),
+            .background(MaterialTheme.colorScheme.surfaceVariant, CircleShape),
         contentAlignment = Alignment.Center,
     ) {
         Icon(
             imageVector = icon,
             contentDescription = contentDescription,
-            tint = color.base,
+            tint = HarcamTheme.colors.textSecondary,
             modifier = Modifier.size(IconSize.lg),
         )
     }

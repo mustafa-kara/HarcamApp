@@ -21,7 +21,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -37,6 +36,7 @@ import com.mustafakara.harcam.core.ui.components.BudgetProgressBar
 import com.mustafakara.harcam.core.ui.components.CategoryAvatar
 import com.mustafakara.harcam.core.ui.components.CategoryIcons
 import com.mustafakara.harcam.core.ui.components.EmptyState
+import com.mustafakara.harcam.core.ui.components.ScreenHeader
 import com.mustafakara.harcam.core.ui.components.PrimaryButton
 import com.mustafakara.harcam.core.ui.components.SkeletonBlock
 import com.mustafakara.harcam.core.ui.theme.HarcamTheme
@@ -65,26 +65,24 @@ fun BudgetScreen(
     val state by viewModel.uiState.collectAsStateWithLifecycle()
     val formatter = remember { MoneyFormatter() }
 
-    Scaffold(
-        modifier = modifier,
-        topBar = { TopAppBar(title = { Text("Budget", style = HarcamTheme.type.headline) }) },
-    ) { padding ->
-        when {
-            state.isLoading -> BudgetSkeleton(Modifier.padding(padding))
-            state.isEmpty -> EmptyState(
-                icon = Icons.Outlined.Savings,
-                title = "No budget set",
-                description = "Set a monthly budget to track your spending.",
-                actionText = "Set budget",
-                onAction = onEdit,
-                modifier = Modifier.padding(padding),
-            )
-            else -> BudgetContent(
-                state = state,
-                formatter = formatter,
-                onEdit = onEdit,
-                modifier = Modifier.padding(padding),
-            )
+    Scaffold(modifier = modifier) { padding ->
+        Column(modifier = Modifier.padding(padding)) {
+            ScreenHeader(title = "Budget")
+            when {
+                state.isLoading -> BudgetSkeleton()
+                state.isEmpty -> EmptyState(
+                    icon = Icons.Outlined.Savings,
+                    title = "No budget set",
+                    description = "Set a monthly budget to track your spending.",
+                    actionText = "Set budget",
+                    onAction = onEdit,
+                )
+                else -> BudgetContent(
+                    state = state,
+                    formatter = formatter,
+                    onEdit = onEdit,
+                )
+            }
         }
     }
 }
@@ -99,7 +97,7 @@ private fun BudgetContent(
     LazyColumn(
         modifier = modifier.fillMaxSize(),
         contentPadding = PaddingValues(
-            start = Spacing.lg, end = Spacing.lg, top = Spacing.md, bottom = Spacing.xxxl,
+            start = Spacing.lg, end = Spacing.lg, top = Spacing.sm, bottom = Spacing.xxxl,
         ),
         verticalArrangement = Arrangement.spacedBy(Spacing.md),
     ) {

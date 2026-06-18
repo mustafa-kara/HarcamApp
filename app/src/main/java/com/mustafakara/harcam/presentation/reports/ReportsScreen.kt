@@ -22,7 +22,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -36,6 +35,7 @@ import com.mustafakara.harcam.core.ui.components.DonutChart
 import com.mustafakara.harcam.core.ui.components.EmptyState
 import com.mustafakara.harcam.core.ui.components.PeriodTabBar
 import com.mustafakara.harcam.core.ui.components.SkeletonBlock
+import com.mustafakara.harcam.core.ui.components.ScreenHeader
 import com.mustafakara.harcam.core.ui.components.StatCard
 import com.mustafakara.harcam.core.ui.components.TrendLineChart
 import com.mustafakara.harcam.core.ui.theme.HarcamTheme
@@ -58,15 +58,13 @@ fun ReportsScreen(
     val state by viewModel.uiState.collectAsStateWithLifecycle()
     val formatter = remember { MoneyFormatter() }
 
-    Scaffold(
-        modifier = modifier,
-        topBar = { TopAppBar(title = { Text("Reports", style = HarcamTheme.type.headline) }) },
-    ) { padding ->
+    Scaffold(modifier = modifier) { padding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(padding),
         ) {
+            ScreenHeader(title = "Reports")
             PeriodTabBar(
                 selected = state.period,
                 onSelect = viewModel::selectPeriod,
@@ -136,7 +134,7 @@ private fun ReportsContent(
         ) {
             // Stat grid (2 columns)
             Row(horizontalArrangement = Arrangement.spacedBy(Spacing.md), modifier = Modifier.fillMaxWidth()) {
-                StatCard("Total", formatter.format(stats.total, state.currency), Modifier.weight(1f), colors.expense)
+                StatCard("Total", formatter.format(stats.total, state.currency), Modifier.weight(1f))
                 StatCard("Avg / day", formatter.format(stats.averagePerDay, state.currency), Modifier.weight(1f))
             }
             Row(horizontalArrangement = Arrangement.spacedBy(Spacing.md), modifier = Modifier.fillMaxWidth()) {
