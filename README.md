@@ -42,7 +42,7 @@ Harcam is a local-first finance companion: log expenses, organize them by catego
 
 ## 🎯 Job-spec signal map
 
-This project was rebuilt to demonstrate a concrete Android skill set. Each requirement maps to real code:
+This project demonstrates a modern Android implementation for a personal-finance product. Each capability maps to real code:
 
 | Requirement | Where it lives |
 |---|---|
@@ -65,6 +65,31 @@ This project was rebuilt to demonstrate a concrete Android skill set. Each requi
 ## 🏗️ Architecture
 
 **MVVM + Clean Architecture** with a repository seam — presentation and domain depend only on `domain` interfaces; `data` provides Room- and Retrofit-backed implementations.
+
+```mermaid
+flowchart TD
+    subgraph Presentation["Presentation (Jetpack Compose)"]
+        S[Screen / Composable]
+        VM["@HiltViewModel · StateFlow&lt;UiState&gt;"]
+    end
+    subgraph Domain["Domain (pure Kotlin)"]
+        UC[UseCases]
+        RI[Repository interfaces]
+    end
+    subgraph Data["Data"]
+        RImpl[Repository impl]
+        Room[(Room DB)]
+        Retro[Retrofit API]
+    end
+    W["WorkManager workers · recurring / reminders"]
+
+    S --> VM --> UC --> RI
+    RImpl -. implements .-> RI
+    RImpl --> Room
+    RImpl --> Retro
+    Retro -. cache fallback .-> Room
+    W --> UC
+```
 
 ```
 com.mustafakara.harcam
